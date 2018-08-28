@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,17 +53,17 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    @BindView(R.id.tv_location_result)
-    TextView tvLocationResult;
+    @BindView(R.id.tv_location_name)
+    TextView tvLocationName;
 
-    @BindView(R.id.tv_updated_on)
-    TextView tvUpdatedOn;
+    @BindView(R.id.iv_weather_icon)
+    ImageView ivWeatherIcon;
 
-    @BindView(R.id.bt_start_location_updates)
-    Button btStartUpdates;
+    @BindView(R.id.tv_weather_name)
+    TextView tvWeatherName;
 
-    @BindView(R.id.bt_stop_location_updates)
-    Button btStopUpdates;
+    @BindView(R.id.tv_weather_temp)
+    TextView tvWeatherTemp;
 
     // Last time location was updated
     private String mLastUpdatedTime;
@@ -88,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
     // weather we are receiving location updates
     private Boolean mRequestingLocationUpdates;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
         // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
+
+        startLocationButtonClick();
     }
 
     private void init() {
@@ -160,17 +160,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateLocationUI() {
         if (mCurrentLocation != null) {
-            tvLocationResult.setText(
-                    "Lat: " + mCurrentLocation.getLatitude() + ", " +
-                            "Lng: " + mCurrentLocation.getLongitude()
-            );
-
-            // giving a blink animation on TextView
-            tvLocationResult.setAlpha(0);
-            tvLocationResult.animate().alpha(1).setDuration(300);
-
-            // location last updated time
-            tvUpdatedOn.setText("Last updated on: " + mLastUpdatedTime);
+            Log.d("HORIZONTE", "Lat: " + mCurrentLocation.getLatitude() + ", " +
+                    "Lng: " + mCurrentLocation.getLongitude());
         }
 
         toggleButtons();
@@ -185,13 +176,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void toggleButtons() {
-        if (mRequestingLocationUpdates) {
-            btStartUpdates.setEnabled(false);
-            btStopUpdates.setEnabled(true);
-        } else {
-            btStartUpdates.setEnabled(true);
-            btStopUpdates.setEnabled(false);
-        }
+//        if (mRequestingLocationUpdates) {
+//            btStartUpdates.setEnabled(false);
+//            btStopUpdates.setEnabled(true);
+//        } else {
+//            btStartUpdates.setEnabled(true);
+//            btStopUpdates.setEnabled(false);
+//        }
     }
 
     /**
@@ -247,7 +238,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.bt_start_location_updates)
     public void startLocationButtonClick() {
         // Requesting ACCESS_FINE_LOCATION using Dexter library
         Dexter.withActivity(this)
@@ -275,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
                 }).check();
     }
 
-    @OnClick(R.id.bt_stop_location_updates)
     public void stopLocationButtonClick() {
         mRequestingLocationUpdates = false;
         stopLocationUpdates();
@@ -294,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.btn_get_last_location)
     public void showLastKnownLocation() {
         if (mCurrentLocation != null) {
             Toast.makeText(getApplicationContext(), "Lat: " + mCurrentLocation.getLatitude()

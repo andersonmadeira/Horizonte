@@ -6,49 +6,37 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:layout_marginTop="10dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/bt_start_location_updates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/start_updates" />
-
-    <Button
-        android:id="@+id/bt_stop_location_updates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:enabled="false"
-        android:text="@string/stop_updates" />
-
-    <Button
-        android:id="@+id/btn_get_last_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/get_last_location" />
-
     <TextView
+        android:id="@+id/tv_location_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal"
-        android:text="Location updates will be received only when app is foreground" />
+        android:textSize="30dp"
+        android:text="Fortaleza"/>
 
-    <TextView
-        android:id="@+id/tv_location_result"
+    <ImageView
+        android:id="@+id/iv_weather_icon"
+        android:contentDescription="Weather information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textColor="#333"
-        android:textSize="18dp" />
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/w_cloudy"/>
 
     <TextView
-        android:id="@+id/tv_updated_on"
+        android:id="@+id/tv_weather_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textSize="11dp" />
+        android:textSize="25dp"
+        android:text="Partly Cloudy"/>
+
+    <TextView
+        android:id="@+id/tv_weather_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="30 C"/>
+
 </LinearLayout>
